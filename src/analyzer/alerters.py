@@ -20,7 +20,7 @@ metric: information about the anomaly itself
 """
 
 
-def alert_smtp(alert, metric):
+def alert_smtp(alert, metric, anomaly_breakdown):
 
     # For backwards compatibility
     if '@' in alert[1]:
@@ -47,13 +47,13 @@ def alert_smtp(alert, metric):
         s.quit()
 
 
-def alert_pagerduty(alert, metric):
+def alert_pagerduty(alert, metric, anomaly_breakdown):
     import pygerduty
     pager = pygerduty.PagerDuty(settings.PAGERDUTY_OPTS['subdomain'], settings.PAGERDUTY_OPTS['auth_token'])
     pager.trigger_incident(settings.PAGERDUTY_OPTS['key'], "Anomalous metric: %s (value: %s)" % (metric[1], metric[0]))
 
 
-def alert_hipchat(alert, metric):
+def alert_hipchat(alert, metric, anomaly_breakdown):
     import hipchat
     hipster = hipchat.HipChat(token=settings.HIPCHAT_OPTS['auth_token'])
     rooms = settings.HIPCHAT_OPTS['rooms'][alert[0]]
@@ -63,11 +63,11 @@ def alert_hipchat(alert, metric):
         hipster.method('rooms/message', method='POST', parameters={'room_id': room, 'from': 'Skyline', 'color': settings.HIPCHAT_OPTS['color'], 'message': 'Anomaly: <a href="%s">%s</a> : %s' % (link, metric[1], metric[0])})
 
 
-def trigger_alert(alert, metric):
+def trigger_alert(alert, metric, anomaly_breakdown):
 
     if '@' in alert[1]:
         strategy = 'alert_smtp'
     else:
         strategy = 'alert_' + alert[1]
 
-    getattr(alerters, strategy)(alert, metric)
+    getattr(alerters, strategy)(alert, metric, anomaly_breakdown)

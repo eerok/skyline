@@ -197,7 +197,7 @@ class Analyzer(Thread):
                                 last_alert = self.redis_conn.get(cache_key)
                                 if not last_alert:
                                     self.redis_conn.setex(cache_key, alert[2], packb(metric[0]))
-                                    trigger_alert(alert, metric)
+                                    trigger_alert(alert, metric, anomaly_breakdown)
 
                             except Exception as e:
                                 logger.error("couldn't send alert: %s" % e)
