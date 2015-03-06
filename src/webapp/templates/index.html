@@ -7,18 +7,50 @@
         <script src="/static/js/dygraph-combined.js"></script>
         <script src="/static/js/skyline.js"></script>
 
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/static/css/skyline.css"> 
+        <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.8.9/css/aui.css" media="all">
+        <script src="//aui-cdn.atlassian.com/aui-adg/5.8.9/js/aui.js"></script>
+        <section id="content" role="main">
 
-        <div id="navbar">
-            <div class='container'>
-                <a href='/' id="logo" class='brand' href='/'>
-                    skyline 
-                </a>
+            <header class="aui-page-header">
+                <div class="aui-page-header-inner">
+                    <div class="aui-page-header-image">
+                        <div class="aui-avatar aui-avatar-xlarge aui-avatar-project">
+                            <div class="aui-avatar-inner">
+                                <img src="static/fisheye.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aui-page-header-main">
+                        <h1>Atlassian Automated Anomaly Detector</h1>
+                    </div>
+            </header>
+
+            <div class="aui-page-panel">cd
+                <div class="aui-page-panel-inner container main_container">
+                    <section class="aui-page-panel-content">
+                        <h2>Select a metric</h2>
+                    <div id="graph_container">
+                            <h3>1 hour:</h3>
+                            <div id="mini_label"></div>
+                            <div id="mini"></div>
+                            <h3>24 hours:</h3>
+                            <div id="big_label"></div>
+                            <div id="graph"></div>
+                        </div>
+
+                    <div id="metrics_main">
+                            <div id="legend">
+                                <span id="legend_name">metric name</span>
+                                <span id="legend_coefficient">anomalous datapoint</span>
+                            </div>
+                            <div id="metrics_listings"></div>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
 
+
+<!--
         <div class="container main_container">
             <div id="title_container">
                 <span id="graph_title">Select a metric</span>
@@ -38,7 +70,8 @@
                 </div>
                 <div id="metrics_listings"></div>
             </div>
-        </div>
+        </div>-->
+        </section>
     </body>
 </html>
 
