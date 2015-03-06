@@ -19,11 +19,13 @@ var handle_data = function(data) {
         name = metric[1]
         var src = GRAPH_URL.replace('%s', name);
         // Add a space after the metric name to make each unique
-        to_append = "<div class='sub'><a target='_blank' href='" + src + "'><div class='name'>" + name + " </div></a>&nbsp;&nbsp;"
+        to_append = "<tr>";
+        to_append += "<td><a target='_blank' href='" + src + "'><div class='name'>" + name + " </div></a></td>&nbsp;&nbsp;"
         if (OCULUS_HOST != ''){
           to_append += "<a class='oculus' target='_blank' href=" + OCULUS_HOST + "/search?p_slop=20&dtw_radius=5&search_type=FastDTW&query=" + name + "&page=&filters=><i class='icon-share-alt'></i></a>";
         }
-        to_append += "<div class='count'>" + parseInt(metric[0]) + "</div>";
+        to_append += "<td class='count'>" + parseInt(metric[0]) + "</td></tr>";
+
         $('#metrics_listings').append(to_append);
     }
 
