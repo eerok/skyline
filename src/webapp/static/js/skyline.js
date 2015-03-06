@@ -20,7 +20,7 @@ var handle_data = function(data) {
         var src = GRAPH_URL.replace('%s', name);
         // Add a space after the metric name to make each unique
         to_append = "<tr>";
-        to_append += "<td><a target='_blank' href='" + src + "'><div class='name'>" + name + " </div></a></td>&nbsp;&nbsp;"
+        to_append += "<td class='sub'><a target='_blank' href='" + src + "'><div class='name'>" + name + " </div></a></td>&nbsp;&nbsp;"
         if (OCULUS_HOST != ''){
           to_append += "<a class='oculus' target='_blank' href=" + OCULUS_HOST + "/search?p_slop=20&dtw_radius=5&search_type=FastDTW&query=" + name + "&page=&filters=><i class='icon-share-alt'></i></a>";
         }
