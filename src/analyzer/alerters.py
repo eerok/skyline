@@ -60,7 +60,7 @@ def alert_hipchat(alert, metric, anomaly_breakdown):
     rooms = settings.HIPCHAT_OPTS['rooms'][alert[0]]
     link = alert[3]
     img = '%s/static/img/c-%s.png' % (host, metric[2])
-    message = '<a href="%s">Anomaly:</a> <b><a href="%s">%s</a></b> <img src="%s">' % (host, link, metric[1], img)
+    message = 'Anomaly: <b><a href="%s">%s</a></b> <a href="%s"><img src="%s"></a>' % (link, metric[1], host, img)
     for room in rooms:
         hipster.method('rooms/message', method='POST', parameters={'room_id': room,
                                                                    'from': 'Skyline',
