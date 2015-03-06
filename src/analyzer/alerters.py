@@ -55,17 +55,17 @@ def alert_pagerduty(alert, metric, anomaly_breakdown):
 
 def alert_hipchat(alert, metric, anomaly_breakdown):
     import hipchat
+    host = 'http://ec2-54-152-19-3.compute-1.amazonaws.com:1500'
     hipster = hipchat.HipChat(token=settings.HIPCHAT_OPTS['auth_token'])
     rooms = settings.HIPCHAT_OPTS['rooms'][alert[0]]
     link = alert[3]
-    img = 'http://ec2-54-152-19-3.compute-1.amazonaws.com:1500/static/img/c-%s.png' % (metric[2])
-    message = 'Anomaly: <a href="%s">%s</a> : %s <img src="%s">' % (link, metric[1], metric[0], img)
+    img = '%s/static/img/c-%s.png' % (host, metric[2])
+    message = '<a href="%s">Anomaly:</a> <b><a href="%s">%s</a></b> <img src="%s">' % (host, link, metric[1], img)
     for room in rooms:
         hipster.method('rooms/message', method='POST', parameters={'room_id': room,
                                                                    'from': 'Skyline',
                                                                    'color': settings.HIPCHAT_OPTS['color'],
-                                                                   'message': message
-        })
+                                                                   'message': message})
 
 
 def trigger_alert(alert, metric, anomaly_breakdown):
