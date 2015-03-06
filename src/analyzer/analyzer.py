@@ -96,7 +96,7 @@ class Analyzer(Thread):
                 # If it's anomalous, add it to list
                 if anomalous:
                     base_name = metric_name.replace(settings.FULL_NAMESPACE, '', 1)
-                    metric = [datapoint, base_name]
+                    metric = [datapoint, base_name, ensemble.count(True)]
                     self.anomalous_metrics.append(metric)
 
                     # Get the anomaly breakdown - who returned True?

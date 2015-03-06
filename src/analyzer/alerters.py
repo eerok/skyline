@@ -57,10 +57,15 @@ def alert_hipchat(alert, metric, anomaly_breakdown):
     import hipchat
     hipster = hipchat.HipChat(token=settings.HIPCHAT_OPTS['auth_token'])
     rooms = settings.HIPCHAT_OPTS['rooms'][alert[0]]
-    link = settings.GRAPH_URL % (metric[1])
-
+    link = alert[3]
+    img = 'http://ec2-54-152-19-3.compute-1.amazonaws.com:1500/static/img/c-%s.png' % (metric[2])
+    message = 'Anomaly: <a href="%s">%s</a> : %s <img src="%s">' % (link, metric[1], metric[0], img)
     for room in rooms:
-        hipster.method('rooms/message', method='POST', parameters={'room_id': room, 'from': 'Skyline', 'color': settings.HIPCHAT_OPTS['color'], 'message': 'Anomaly: <a href="%s">%s</a> : %s' % (link, metric[1], metric[0])})
+        hipster.method('rooms/message', method='POST', parameters={'room_id': room,
+                                                                   'from': 'Skyline',
+                                                                   'color': settings.HIPCHAT_OPTS['color'],
+                                                                   'message': message
+        })
 
 
 def trigger_alert(alert, metric, anomaly_breakdown):
